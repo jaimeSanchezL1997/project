@@ -1,6 +1,57 @@
 body{
-    background-color: blueviolet;
+    background-image: url("../public/img/25367083_7087743.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .card{
+    height:100%;
+    width: 100%;
+
+}
+.image{
+    height: 10px;
+}
+.noinfo{
+    background-image: url("../public/img/34643920_8170170.jpg");
+}
+.info{
+    background-color: rgba(66, 1, 60, 0.788);
+    border-radius: 0px;
+
+}
+
+.user{
+    overflow-y: scroll;
+    height:90vh;
     
+    
+}
+
+.user::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.user::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.user::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.user::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.user::-webkit-scrollbar-thumb {
+    background-color: #2b0222af;
+    border-radius: 20px;
+    border: 2px solid #575d6300;
+}
+
+.user::-webkit-scrollbar-track {
+    border-radius: 0px;  
+}
+.box{
+    margin-bottom: 5px;
 }

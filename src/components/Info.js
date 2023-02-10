@@ -6,14 +6,16 @@ const Person = () => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(false);
   const [foundUsers, setFoundUsers] = useState(posts);
-  const [name, setName] = useState("");
+  const [mail, setMail] = useState("");
+  const [fullname,setfullname] = useState("");
   const results = {};
   useEffect(() => {
-    fetch("https://randomuser.me/api?results=5&noinfo")
+    fetch("https://randomuser.me/api?results=10&noinfo")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setPosts(data.results);
+        setFoundUsers(data.results);
       })
       .catch((err) => {
         console.log(err.message);
@@ -22,54 +24,48 @@ const Person = () => {
 
   const info = async (e) => {
     const index = e.target.closest(".box").dataset.index;
-    setUser(posts[index]);
-    console.log(user);
+    console.log(index);
+    const infoUserSingle = posts.find(post => post.email === index);
+    setUser(infoUserSingle);
+    setfullname(infoUserSingle.name.title + " "+ infoUserSingle.name.first + " "+ infoUserSingle.name.last );
   };
-
-  const handleChange = async (e) => {
-    const index = e.target.closest(".box").dataset.index;
-    setUser(posts[index]);
-    console.log(user);
-  };
-
+  
   const filter = (e) => {
     const keyword = e.target.value;
-
     if (keyword !== "") {
-      const results = posts.filter((user) => {
-        return user.email.toLowerCase().startsWith(keyword.toLowerCase());
-        // Use the toLowerCase() method to make it case-insensitive
+      const results = posts.filter(user => {
+        return user.email.toLowerCase().startsWith(keyword.toLowerCase())
       });
       setFoundUsers(results);
     } else {
       setFoundUsers(posts);
-      // If the text field is empty, show all users
     }
 
-    setName(keyword);
+    setMail(keyword);
   };
-
+  const exit = async (e) => {
+    setUser(false);
+  }
   return (
     <div class="columns">
       <div class="column is-one-third">
-        <div className="container">
-          <input type="search" value={name} onChange={filter} className="input" placeholder="Filter" />
-          <div className="user-list">
+        <div className="container" >
+          <input type="search" value={mail} onChange={filter} className="input" placeholder="Search email" />
+          <div className="user-list  user">
             {foundUsers && foundUsers.length  ? (
-              foundUsers.map((post, index) => (    
-                  <div class="box" onClick={info} data-index={index}>
+              foundUsers.map((post, index) => (
+                  <div class="box m-0 info"  onClick={info} data-index={post.email}>
                     <article class="media">
                       <div class="media-left">
                         <figure class="image is-64x64">
-                          <img src={post.picture.medium} alt="Image" />
+                          <img src={post.picture.large} alt="Image" />
                         </figure>
                       </div>
                       <div class="media-content">
                         <div class="content">
                           <p>
-                            <strong>{post.name.title}</strong>{" "}
-                            <small>{post.name.first}</small>{" "}
-                            <small>{post.name.last}</small>
+                            <strong>{post.name.title+" " +post.name.first + " " + post.name.last}</strong>
+                          
                             <br />
                             <p>Email:{post.email}</p>
                           </p>
@@ -106,41 +102,43 @@ const Person = () => {
           </div>
         </div>
       </div>
-      <div class="column  is-half  ">
+      <div class="column  is-two-thirds ">
         {user ? (
           <div class="card is-centered">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <img src={user.picture.large} />
-              </figure>
-            </div>
             <div class="card-content">
               <div class="media">
                 <div class="media-left">
-                  <figure class="image is-48x48">
-                    <img
-                      src="https://bulma.io/images/placeholders/96x96.png"
-                      alt="Placeholder image"
-                    />
+                  <figure class="image ">
+                    <img src={user.picture.large}/>
                   </figure>
                 </div>
+                <div class="media-right" onClick={exit}>
+                    <p>X</p>
+                  </div>
                 <div class="media-content">
-                  <p class="title is-4"></p>
-                  <p class="subtitle is-6">{user.email}</p>
+                  <p class="title is-4">{fullname}</p>
+                  <p class="subtitle is-6">@{user.login.username}</p>
                   <p class="subtitle is-6">{user.gender}</p>
+                  <p>{user.dob.age}</p>
                 </div>
               </div>
               <div class="content">
+                <p class="title is-4">Contact</p>
+                <p  class="">Phone number: {user.phone}</p>
+                <p class="">Email:{user.email}</p>
+                <p class="subtitle is-6">Adress:</p>
+                <p>{user.location.street.name}{user.location.street.number}</p>
+                <p>{user.location.city}{user.location.state}{user.location.country}</p>
+                <p>{user.location.postcode}</p>
                 <p>Nationality:{user.nat}</p>
-
                 <br />
-                <time datetime="2016-1-1">Registrer: {user.registere}</time>
+                <p >Registrer: {user.registered.date}</p>
               </div>
             </div>
           </div>
         ) : (
-          <div>
-            <img src={user ? user.picture : "./img/mosaico.jpg"} />
+          <div class="noinfo" >
+            
           </div>
         )}
       </div>
