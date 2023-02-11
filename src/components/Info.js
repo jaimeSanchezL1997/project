@@ -50,7 +50,11 @@ const Person = () => {
     <div class="columns">
       <div class="column is-one-third">
         <div className="container" >
-          <input type="search" value={mail} onChange={filter} className="input" placeholder="SEARCH MAIL" />
+          <div class="input-icon">
+            
+            <input type="search" value={mail} onChange={filter} className="input input-field" placeholder="Search mail" />
+          </div>
+          
           <div className="user-list  user">
             {foundUsers && foundUsers.length  ? (
               foundUsers.map((post, index) => (
@@ -91,7 +95,6 @@ const Person = () => {
                     <img class ="imgsmall"src={user.picture.large}/>
                   </figure>
                 </div>
-                
                 <div class="media-content">
                   <p class="title is-1 m-0">{fullname}</p>
                   <p class="subtitle is-3 m-0">@{user.login.username}</p>
@@ -119,10 +122,15 @@ const Person = () => {
                   <p>Nationality: {user.nat}</p>
                 </div>
               </div>
-              <br/>
-              <div>
-                <p class="title is-4">REGISTER:</p>
-                <p class="">Registrer: {user.registered.date}</p>
+            
+              <div class="columns register" >
+                <div class="column is-four-fifths">
+                  <p class="title is-4">REGISTER:</p>
+                  <p class="">Registrer: {user.registered.date}</p>
+                </div>
+                <div class="column is-one-quarter"><br/><br/>
+                  <p class="">ID: {user.id.value ? user.id.value : " No ID"}</p>
+                </div>
               </div>
             </div>
           </div>

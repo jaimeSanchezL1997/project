@@ -12,9 +12,7 @@ body{
 .image{
     height: 10px;
 }
-.noinfo{
-    background-image: url("../public/img/34643920_8170170.jpg");
-}
+
 .info{
     background-color: rgba(105, 7, 95, 0.993);
     border-radius: 0px;
@@ -22,12 +20,24 @@ body{
 }
 .input{
     background-color:rgba(105, 7, 95, 0.993) ;
-    border-bottom-color:rgb(216, 30, 197) ;
-    
-    
-    
+    border-radius: 5px;
     color: white;
 }
+.register{
+    margin-top: 20%;
+}
+.input-icon {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+  
+.input-field {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
 .input::placeholder {
     font-family: calibri;
     color: rgba(255, 255, 255, 0.788);
@@ -38,8 +48,8 @@ body{
 }
 .user{
     overflow-y: scroll;
-    height:90vh;
-    
+    height:88vh;
+    border-radius: 5px;
     
 }
 .imgsmall{
