@@ -2,6 +2,7 @@ body{
     background-image: url("../public/img/25367083_7087743.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: calibri;
 }
 .card{
     height:100%;
@@ -15,16 +16,34 @@ body{
     background-image: url("../public/img/34643920_8170170.jpg");
 }
 .info{
-    background-color: rgba(66, 1, 60, 0.788);
+    background-color: rgba(105, 7, 95, 0.993);
     border-radius: 0px;
 
 }
+.input{
+    background-color:rgba(105, 7, 95, 0.993) ;
+    border-bottom-color:rgb(216, 30, 197) ;
+    
+    
+    
+    color: white;
+}
+.input::placeholder {
+    font-family: calibri;
+    color: rgba(255, 255, 255, 0.788);
 
+  }
+.close{
+    font-size: 4vh;
+}
 .user{
     overflow-y: scroll;
     height:90vh;
     
     
+}
+.imgsmall{
+    border-radius: 80%;
 }
 
 .user::-webkit-scrollbar {
@@ -32,7 +51,7 @@ body{
 }
 
 .user::-webkit-scrollbar:vertical {
-    width:10px;
+    width:2px;
 }
 
 .user::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
@@ -44,8 +63,8 @@ body{
 }
 
 .user::-webkit-scrollbar-thumb {
-    background-color: #2b0222af;
-    border-radius: 20px;
+    background-color: #7a7279af;
+    
     border: 2px solid #575d6300;
 }
 

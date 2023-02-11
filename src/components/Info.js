@@ -43,14 +43,14 @@ const Person = () => {
 
     setMail(keyword);
   };
-  const exit = async (e) => {
+  const close = async (e) => {
     setUser(false);
   }
   return (
     <div class="columns">
       <div class="column is-one-third">
         <div className="container" >
-          <input type="search" value={mail} onChange={filter} className="input" placeholder="Search email" />
+          <input type="search" value={mail} onChange={filter} className="input" placeholder="SEARCH MAIL" />
           <div className="user-list  user">
             {foundUsers && foundUsers.length  ? (
               foundUsers.map((post, index) => (
@@ -58,40 +58,19 @@ const Person = () => {
                     <article class="media">
                       <div class="media-left">
                         <figure class="image is-64x64">
-                          <img src={post.picture.large} alt="Image" />
+                          <img class="imgsmall" src={post.picture.large} alt="Image" />
                         </figure>
                       </div>
                       <div class="media-content">
                         <div class="content">
-                          <p>
-                            <strong>{post.name.title+" " +post.name.first + " " + post.name.last}</strong>
-                          
+                          <p class="has-text-white">
+                            {post.name.title+" " +post.name.first + " " + post.name.last}
                             <br />
-                            <p>Email:{post.email}</p>
+                            @ {post.login.username}
+                            <p>Email: {post.email}</p>
                           </p>
                         </div>
-                        <nav class="level is-mobile">
-                          <div class="level-left">
-                            <a class="level-item" aria-label="reply">
-                              <span class="icon is-small">
-                                <i class="fas fa-reply" aria-hidden="true"></i>
-                              </span>
-                            </a>
-                            <a class="level-item" aria-label="retweet">
-                              <span class="icon is-small">
-                                <i
-                                  class="fas fa-retweet"
-                                  aria-hidden="true"
-                                ></i>
-                              </span>
-                            </a>
-                            <a class="level-item" aria-label="like">
-                              <span class="icon is-small">
-                                <i class="fas fa-heart" aria-hidden="true"></i>
-                              </span>
-                            </a>
-                          </div>
-                        </nav>
+                        
                       </div>
                     </article>
                   </div>               
@@ -104,35 +83,46 @@ const Person = () => {
       </div>
       <div class="column  is-two-thirds ">
         {user ? (
-          <div class="card is-centered">
+          <div class="card ">
             <div class="card-content">
               <div class="media">
                 <div class="media-left">
                   <figure class="image ">
-                    <img src={user.picture.large}/>
+                    <img class ="imgsmall"src={user.picture.large}/>
                   </figure>
                 </div>
-                <div class="media-right" onClick={exit}>
-                    <p>X</p>
-                  </div>
+                
                 <div class="media-content">
-                  <p class="title is-4">{fullname}</p>
-                  <p class="subtitle is-6">@{user.login.username}</p>
-                  <p class="subtitle is-6">{user.gender}</p>
-                  <p>{user.dob.age}</p>
+                  <p class="title is-1 m-0">{fullname}</p>
+                  <p class="subtitle is-3 m-0">@{user.login.username}</p>
+                  <p class=" subtitle is-6"><strong>Gender:</strong> {user.gender}&nbsp;<strong>Age:</strong> {user.dob.age}</p>
+                  <p></p>
+                </div>
+                <br />
+                <div class="media-right close" onClick={close}>
+                  <i class="fa fa-close"></i>
                 </div>
               </div>
-              <div class="content">
-                <p class="title is-4">Contact</p>
-                <p  class="">Phone number: {user.phone}</p>
-                <p class="">Email:{user.email}</p>
-                <p class="subtitle is-6">Adress:</p>
-                <p>{user.location.street.name}{user.location.street.number}</p>
-                <p>{user.location.city}{user.location.state}{user.location.country}</p>
-                <p>{user.location.postcode}</p>
-                <p>Nationality:{user.nat}</p>
-                <br />
-                <p >Registrer: {user.registered.date}</p>
+             
+              <div class="columns">
+                <div class="column is-half">
+                  <p class="title is-4">CONTACT:</p>
+                  <p  class="">Phone number: {user.phone}</p>
+                  <p  class="">Cell number: {user.cell}</p>
+                  <p class="">Email: {user.email}</p>
+                </div>
+                <div class="column is-half">
+                  <p class="title is-4">ADRESS:</p>
+                  <p>Street: {user.location.street.name} #{user.location.street.number}</p>
+                  <p>{user.location.city},{user.location.state},{user.location.country}</p>
+                  <p>Postcode: {user.location.postcode}</p>
+                  <p>Nationality: {user.nat}</p>
+                </div>
+              </div>
+              <br/>
+              <div>
+                <p class="title is-4">REGISTER:</p>
+                <p class="">Registrer: {user.registered.date}</p>
               </div>
             </div>
           </div>
